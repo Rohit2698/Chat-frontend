@@ -6,12 +6,21 @@ import {
   Container,
   TextField,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.scss";
-
+import { io } from "socket.io-client";
+import axios from "axios";
+const socket = io("http://localhost:3005/");
 function App() {
-  const [chat, setChat] = useState(["Hello how are you", "I am fine"]);
-
+  const [chat, setChat] = useState<any>(["Hello how are you", "I am fine"]);
+  const [mes, setmes] = useState("");
+  useEffect(() => {
+    socket.on("chat", (data: any) => {
+      // alert(data);
+      console.log(data.message);
+      setChat(data.message);
+    });
+  }, []);
   const showChats = (message: string): JSX.Element => {
     return (
       <Card style={{ marginTop: "5px", width: "fit-content", padding: "5px" }}>
@@ -19,7 +28,12 @@ function App() {
       </Card>
     );
   };
-
+  const sendMessage = (): void => {
+    setChat((prevState: any)=>[...prevState, mes]);
+    socket.emit("sendMessage", {
+      message: [...chat, mes]
+    });
+  };
   return (
     <Container
       fixed
@@ -37,13 +51,23 @@ function App() {
             overflowY: "auto",
           }}
         >
-          {chat.map((item) => showChats(item))}
+          {chat.map((item: any) => showChats(item))}
         </Stack>
         <Stack horizontal style={{ height: "10%", marginTop: "10px" }}>
           <form noValidate style={{ width: "100%" }} className={"message-form"}>
-            <TextField id="standard-basic" label="Write Message" />
+            <TextField
+              id="standard-basic"
+              name={"message"}
+              label="Write Message"
+              onChange={(event)=>setmes(event.target.value)}
+            />
           </form>
-          <Button variant="contained" color="primary" style={{ height: "70%" }}>
+          <Button
+            onClick={sendMessage}
+            variant="contained"
+            color="primary"
+            style={{ height: "70%" }}
+          >
             Send Message
           </Button>
         </Stack>
@@ -51,5 +75,4 @@ function App() {
     </Container>
   );
 }
-
 export default App;
