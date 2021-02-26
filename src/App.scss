@@ -1,5 +1,53 @@
 .message-form {
+  width: 100%;
   .MuiFormControl-root {
     width: 90%;
   }
+}
+
+.messages {
+  background-color: white;
+  padding: 5px;
+}
+
+.my-messages {
+  background-color: #54a6a9;
+  color: white;
+  border-radius: 5px 5px 0px 5px;
+}
+
+.message-container {
+  height: 70%;
+  padding-left: 5px;
+  background-color: #eeeee4;
+  overflow-y: auto;
+}
+.other-messages {
+  border-radius: 5px 5px 5px 0px;
+}
+
+.height-70per {
+  height: 70%;
+}
+
+.height-10per {
+  height: 10%;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.height-100per {
+  height: 100%;
+}
+
+.width-50per {
+  width: 50%;
+}
+
+.chat-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 }
