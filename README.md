@@ -1,5 +1,6 @@
 # Frontend
-![image](https://user-images.githubusercontent.com/36307148/108321739-9588f980-71ea-11eb-8180-d8b8d2327a00.png)
+![image](https://user-images.githubusercontent.com/36307148/109316329-83096280-7871-11eb-8ad1-4aa7b88e2675.png)
+
 
 
 # Getting Started with Create React App
